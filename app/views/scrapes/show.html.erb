@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @scrape.name %>
+</p>
+
+<p>
+  <b>Dump:</b>
+  <%= @scrape.dump %>
+</p>
+
+
+<%= link_to 'Edit', edit_scrape_path(@scrape) %> |
+<%= link_to 'Back', scrapes_path %>
