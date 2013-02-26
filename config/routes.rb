@@ -1,9 +1,12 @@
 Datamove::Application.routes.draw do
+  get "import/analyze"
+
   resources :scrapes
 
 
   resources :posts
 
+  get 'import/analyze'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -54,7 +57,7 @@ Datamove::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
+  root :to => 'scrapes#index'
 
   # See how all your routes lay out with "rake routes"
 

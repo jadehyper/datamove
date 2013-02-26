@@ -18,8 +18,16 @@ namespace :db do
   end
  
 
+  #rake db:recreate
+  desc "drops and recreates the database"
+  task :recreate => :environment do
+    puts "Creating import_dump.sql file."
 
-  #rake db:create RAILS_ENV=development_temp
+    # `mysqldump -u "#{username}"  --password="#{password}" "#{original_database}" > "#{dest + original_database}"_dump.sql`
+
+
+    `mysqldump -u "#{username}" "#{original_database}" > #{dest}import_dump.sql`
+  end
 
   #rake db:dumpimport - Resets the DB.
   desc "imports the .sql file to temp_database"
