@@ -1,5 +1,9 @@
 class ImportController < ApplicationController
   def analyze
-    raise TempDb.get_definition("posts").inspect
+
+    if params[:temp_db_table]
+      @temp_db_data = TempDb.get_data(params[:temp_db_table])
+    end
+
   end
 end

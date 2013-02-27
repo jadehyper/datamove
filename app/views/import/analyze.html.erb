@@ -1,2 +1,16 @@
 <h1>Import#analyze</h1>
 <p>Find me in app/views/import/analyze.html.erb</p>
+
+
+Here are the tables in the temp database:
+<br/>
+
+<%= form_tag import_analyze_path, :method => 'get' do %>
+  <p>
+    <%= select_tag :temp_db_table, options_for_select(TempDb.get_tables, params[:temp_db_table]), :onchange => 'this.form.submit()' %>
+  </p>
+<% end %>
+
+<% if @temp_db_data %>
+  <%= @temp_db_data.to_s %>
+<% end %>
