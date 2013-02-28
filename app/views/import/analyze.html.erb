@@ -11,6 +11,70 @@ Here are the tables in the temp database:
   </p>
 <% end %>
 
+
+<% if @table_def %>
+  <br>
+  <h3>Table definition:</h3>
+  <table>
+    <tr>
+      <th>Field</th> 
+      <th>Type</th> 
+      <th>Null</th>
+      <th>Key</th>
+      <th>Default</th> 
+      <th>Extra</th>
+    </tr>
+
+  <% @table_def.each do |record| %>
+    <tr>
+      <% record.each do |content| %>
+        <td>
+          <%= content %>
+        </td>
+      <% end %>
+    </tr> 
+  <% end %>
+  </table>
+
+<% end %>
+
+
+
+
 <% if @temp_db_data %>
-  <%= @temp_db_data.to_s %>
+  <br>
+  <h3>Table data:</h3>
+  <table>
+    <% @temp_db_data.each_with_index do |record, i| %>  
+      <% if i == 0 %>
+        <!-- write out header row -->
+        <tr>
+          <% record.each do |key, value| %>
+            <th><%= key %></th> 
+          <% end %>
+        </tr>
+      <% end %>
+      
+      <tr>
+        <% record.each do |key, value| %>
+          <td><%= value %></td> 
+        <% end %>
+      </tr>    
+    <% end %>
+
+  </table>
+
+<% end %>
+
+
+
+
+<% if @temp_db_data %>
+  <% @temp_db_data.each do |record| %>
+    <% record.each do |key, value| %>
+      <%= "key: #{key}" %><br>
+      <%= "value: #{value}" %><br>
+      <br><br>
+    <% end %>
+  <% end %>
 <% end %>
