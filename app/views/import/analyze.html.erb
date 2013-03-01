@@ -1,19 +1,17 @@
-<h1>Import#analyze</h1>
-<p>Find me in app/views/import/analyze.html.erb</p>
-
-
-Here are the tables in the temp database:
-<br/>
 
 <%= form_tag import_analyze_path, :method => 'get' do %>
-  <p>
+Temp table from latest import:
     <%= select_tag :temp_db_table, options_for_select(TempDb.get_tables, params[:temp_db_table]), :onchange => 'this.form.submit()' %>
-  </p>
 <% end %>
 
 
-<% if @table_def %>
-  <br>
+<%= form_tag import_analyze_path, :method => 'get' do %>
+Permanent table:
+    <%= select_tag :permanent_db_table, options_for_select(PermanentDb.get_tables, params[:permanent_db_table]), :onchange => 'this.form.submit()' %>
+<% end %>
+
+
+<% if @temp_table_def %>
   <h3>Table definition:</h3>
   <table>
     <tr>
@@ -25,7 +23,7 @@ Here are the tables in the temp database:
       <th>Extra</th>
     </tr>
 
-  <% @table_def.each do |record| %>
+  <% @temp_table_def.each do |record| %>
     <tr>
       <% record.each do |content| %>
         <td>
@@ -35,11 +33,7 @@ Here are the tables in the temp database:
     </tr> 
   <% end %>
   </table>
-
 <% end %>
-
-
-
 
 <% if @temp_db_data %>
   <br>
@@ -68,13 +62,53 @@ Here are the tables in the temp database:
 
 
 
+<% if @permanent_table_def %>
+  <h3>Table definition:</h3>
+  <table>
+    <tr>
+      <th>Field</th> 
+      <th>Type</th> 
+      <th>Null</th>
+      <th>Key</th>
+      <th>Default</th> 
+      <th>Extra</th>
+    </tr>
 
-<% if @temp_db_data %>
-  <% @temp_db_data.each do |record| %>
-    <% record.each do |key, value| %>
-      <%= "key: #{key}" %><br>
-      <%= "value: #{value}" %><br>
-      <br><br>
-    <% end %>
+  <% @permanent_table_def.each do |record| %>
+    <tr>
+      <% record.each do |content| %>
+        <td>
+          <%= content %>
+        </td>
+      <% end %>
+    </tr> 
   <% end %>
+  </table>
 <% end %>
+
+<% if @permanent_db_data %>
+  <br>
+  <h3>Table data:</h3>
+  <table>
+    <% @permanent_db_data.each_with_index do |record, i| %>  
+      <% if i == 0 %>
+        <!-- write out header row -->
+        <tr>
+          <% record.each do |key, value| %>
+            <th><%= key %></th> 
+          <% end %>
+        </tr>
+      <% end %>
+      
+      <tr>
+        <% record.each do |key, value| %>
+          <td><%= value %></td> 
+        <% end %>
+      </tr>    
+    <% end %>
+
+  </table>
+
+<% end %>
+
+
