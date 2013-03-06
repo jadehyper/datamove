@@ -1,13 +1,13 @@
 
 <%= form_tag import_analyze_path, :method => 'get' do %>
 Temp table from latest import:
-    <%= select_tag :temp_db_table, options_for_select(TempDb.get_tables, params[:temp_db_table]), :onchange => 'this.form.submit()' %>
+    <%= select_tag :temp_db_table, options_for_select(TempDb.get_tables, params[:temp_db_table]), :onchange => 'this.form.submit()', :prompt => 'Select a table' %>
 <% end %>
 
 
 <%= form_tag import_analyze_path, :method => 'get' do %>
 Permanent table:
-    <%= select_tag :permanent_db_table, options_for_select(PermanentDb.get_tables, params[:permanent_db_table]), :onchange => 'this.form.submit()' %>
+    <%= select_tag :permanent_db_table, options_for_select(PermanentDb.get_tables, params[:permanent_db_table]), :onchange => 'this.form.submit()', :prompt => 'Select a table' %>
 <% end %>
 
 

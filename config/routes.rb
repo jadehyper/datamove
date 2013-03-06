@@ -2,13 +2,14 @@ Datamove::Application.routes.draw do
   get "home/index"
 
   get "import/analyze"
+  get "import/data_migrate"
+  get "import/temp_tab_cols"
 
   resources :scrapes
 
 
   resources :posts
 
-  get 'import/analyze'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
