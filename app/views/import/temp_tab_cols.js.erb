@@ -1,8 +1,0 @@
-//$('#temp_col_span').html('<%= @temp_table_def.inspect %>');
-
-//  Hash[*@temp_table_def].inspect
-<% logger.debug raw select_tag "temp_db_cols", options_for_select(@temp_table_def, @temp_table_def[0]) %> 
-
-
-$('#temp_col_span').html('<%= escape_javascript(select_tag "temp_db_cols", options_for_select(@temp_table_def, @temp_table_def[0])) %>');
-

@@ -1,32 +1,33 @@
 # SQLite version 3.x
 #   gem install sqlite3-ruby (not necessary on OS X Leopard)
+
+
 development:
   adapter: mysql2
   host: 127.0.0.1
-  database: original_db_dev
+  database: admin_db_dev
   username: root
   password: 
   pool: 5
   timeout: 5000
   reconnect: true
 
-development_temp:
+development_dest:
   adapter: mysql2
   host: 127.0.0.1
-  database: temp_db_dev
+  database: dest_db_dev
   username: root
   password: 
   pool: 5
   timeout: 5000
   reconnect: true
 
-
-test:
+development_src:
   adapter: mysql2
-  host: localhost
-  database: original_db_test
+  host: 127.0.0.1
+  database: src_db_dev
   username: root
-  password:
+  password: 
   pool: 5
   timeout: 5000
   reconnect: true

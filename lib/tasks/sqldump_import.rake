@@ -1,5 +1,5 @@
-original_database = "original_db_dev" #todo: abstract
-temp_database = "temp_db_dev"
+original_database = "dest_db_dev" #todo: abstract
+temp_database = "src_db_dev"
 username = "root"
 password = ""
 dest = Rails.root + 'tmp/'
@@ -38,10 +38,6 @@ namespace :db do
 
     # `mysql -u "#{username}" --password="#{password}" "#{temp_database}" < "#{temp_database}"_dump.sql`
     `mysql -u "#{username}" "#{temp_database}" < #{dest}`
-  end
-
-  task :testargs, [:arg1, :arg2] => :environment do |t, args|
-    puts args.inspect
   end
  
 end

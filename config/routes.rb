@@ -3,12 +3,10 @@ Datamove::Application.routes.draw do
 
   get "import/analyze"
   get "import/data_migrate"
-  get "import/temp_tab_cols"
+  get "import/src_tab_cols"
+  get "import/dest_tab_cols"
 
   resources :scrapes
-
-
-  resources :posts
 
 
   # The priority is based upon order of creation:

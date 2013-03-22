@@ -41,12 +41,10 @@ class ScrapesController < ApplicationController
   # POST /scrapes.json
   def create
     @scrape = Scrape.new(params[:scrape])
-
-    # call_rake "db:testargs[arg1,arg2]", :rails_env => ENV['RAILS_ENV'] + "_temp"    
     
     respond_to do |format|
       if @scrape.save        
-        call_rake "db:dumpimport[#{@scrape.dump}]", :rails_env => ENV['RAILS_ENV'] + "_temp"    
+        call_rake "db:dumpimport[#{@scrape.dump}]", :rails_env => ENV['RAILS_ENV'] + "_src"    
 
 
 

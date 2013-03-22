@@ -2,18 +2,18 @@
 
 <%= form_tag import_analyze_path, :method => 'get' do %>
 Source table:
-    <%= select_tag :temp_db_table, options_for_select(TempDb.get_tables, params[:temp_db_table]), :onchange => '$.get("/import/temp_tab_cols?temp_db_table=" + this.value);', :prompt => 'Select a table' %>
+    <%= select_tag :src_db_table, options_for_select(SourceDb.get_tables, params[:src_db_table]), :onchange => '$.get("/import/src_tab_cols?src_db_table=" + this.value);', :prompt => 'Select a table' %>
 <% end %>
 
 
 
-Source column: <span id="temp_col_span"></span>
+Source column: <span id="src_col_span"></span>
 
-
+<br><br>
 
 <%= form_tag import_analyze_path, :method => 'get' do %>
 Destination table:
-    <%= select_tag :permanent_db_table, options_for_select(PermanentDb.get_tables, params[:permanent_db_table]), :onchange => 'this.form.submit()', :prompt => 'Select a table' %>
+    <%= select_tag :dest_db_table, options_for_select(DestinationDb.get_tables, params[:dest_db_table]), :onchange => '$.get("/import/dest_tab_cols?dest_db_table=" + this.value);', :prompt => 'Select a table' %>
 <% end %>
 
-Destination column:
+Destination column: <span id="dest_col_span"></span>

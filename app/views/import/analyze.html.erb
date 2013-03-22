@@ -1,17 +1,17 @@
 
 <%= form_tag import_analyze_path, :method => 'get' do %>
-Temp table from latest import:
-    <%= select_tag :temp_db_table, options_for_select(TempDb.get_tables, params[:temp_db_table]), :onchange => 'this.form.submit()', :prompt => 'Select a table' %>
+Source table from latest import:
+    <%= select_tag :src_db_table, options_for_select(SourceDb.get_tables, params[:src_db_table]), :onchange => 'this.form.submit()', :prompt => 'Select a table' %>
 <% end %>
 
 
 <%= form_tag import_analyze_path, :method => 'get' do %>
-Permanent table:
-    <%= select_tag :permanent_db_table, options_for_select(PermanentDb.get_tables, params[:permanent_db_table]), :onchange => 'this.form.submit()', :prompt => 'Select a table' %>
+Destination table:
+    <%= select_tag :destination_db_table, options_for_select(DestinationDb.get_tables, params[:destination_db_table]), :onchange => 'this.form.submit()', :prompt => 'Select a table' %>
 <% end %>
 
 
-<% if @temp_table_def %>
+<% if @src_table_def %>
   <h3>Table definition:</h3>
   <table>
     <tr>
@@ -23,7 +23,7 @@ Permanent table:
       <th>Extra</th>
     </tr>
 
-  <% @temp_table_def.each do |record| %>
+  <% @src_table_def.each do |record| %>
     <tr>
       <% record.each do |content| %>
         <td>
@@ -35,11 +35,11 @@ Permanent table:
   </table>
 <% end %>
 
-<% if @temp_db_data %>
+<% if @src_db_data %>
   <br>
   <h3>Table data:</h3>
   <table>
-    <% @temp_db_data.each_with_index do |record, i| %>  
+    <% @src_db_data.each_with_index do |record, i| %>  
       <% if i == 0 %>
         <!-- write out header row -->
         <tr>
@@ -62,7 +62,7 @@ Permanent table:
 
 
 
-<% if @permanent_table_def %>
+<% if @destination_table_def %>
   <h3>Table definition:</h3>
   <table>
     <tr>
@@ -74,7 +74,7 @@ Permanent table:
       <th>Extra</th>
     </tr>
 
-  <% @permanent_table_def.each do |record| %>
+  <% @destination_table_def.each do |record| %>
     <tr>
       <% record.each do |content| %>
         <td>
@@ -86,11 +86,11 @@ Permanent table:
   </table>
 <% end %>
 
-<% if @permanent_db_data %>
+<% if @destination_db_data %>
   <br>
   <h3>Table data:</h3>
   <table>
-    <% @permanent_db_data.each_with_index do |record, i| %>  
+    <% @destination_db_data.each_with_index do |record, i| %>  
       <% if i == 0 %>
         <!-- write out header row -->
         <tr>
