@@ -1,0 +1,23 @@
+<h1>Listing data_migrations</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @data_migrations.each do |data_migration| %>
+  <tr>
+    <td><%= data_migration.name %></td>
+    <td><%= link_to 'Show', data_migration %></td>
+    <td><%= link_to 'Edit', edit_data_migration_path(data_migration) %></td>
+    <td><%= link_to 'Destroy', data_migration, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Data migration', new_data_migration_path %>

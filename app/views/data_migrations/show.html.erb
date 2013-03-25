@@ -1,0 +1,16 @@
+<p id="notice"><%= notice %></p>
+<p>
+  <b>Name:</b>
+  <%= @data_migration.name %>
+</p>
+
+<p>
+  <b>Rules:</b>
+  <% @data_migration.migration_rules.each do |mr| %>
+    <br>
+    <%= mr.table_name %>
+  <% end %>
+</p>
+
+<%= link_to 'Edit', edit_data_migration_path(@data_migration) %> |
+<%= link_to 'Back', data_migrations_path %>

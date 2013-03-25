@@ -1,4 +1,7 @@
 Datamove::Application.routes.draw do
+  resources :data_migrations
+
+
   get "home/index"
 
   get "import/analyze"

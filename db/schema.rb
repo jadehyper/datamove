@@ -11,14 +11,29 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130214194027) do
+ActiveRecord::Schema.define(:version => 20130322210118) do
 
-  create_table "posts", :force => true do |t|
-    t.string   "name"
-    t.string   "title"
-    t.text     "content"
+  create_table "data_migrations", :force => true do |t|
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "name"
+  end
+
+  create_table "mapping_rules", :force => true do |t|
+    t.string   "src_table"
+    t.string   "src_column"
+    t.string   "dest_table"
+    t.string   "dest_column"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.integer  "migration_rule_id"
+  end
+
+  create_table "migration_rules", :force => true do |t|
+    t.string   "table_name"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.integer  "data_migration_id"
   end
 
   create_table "scrapes", :force => true do |t|

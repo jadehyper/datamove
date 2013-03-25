@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  src_table: MyString
+  src_column: MyString
+  dest_table: MyString
+  dest_column: MyString
+
+two:
+  src_table: MyString
+  src_column: MyString
+  dest_table: MyString
+  dest_column: MyString
