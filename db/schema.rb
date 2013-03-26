@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130322210118) do
+ActiveRecord::Schema.define(:version => 20130326004712) do
 
   create_table "data_migrations", :force => true do |t|
     t.datetime "created_at", :null => false
@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(:version => 20130322210118) do
     t.string   "dest_column"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
-    t.integer  "migration_rule_id"
+    t.integer  "data_migration_id"
   end
 
   create_table "migration_rules", :force => true do |t|

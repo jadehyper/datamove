@@ -1,1 +1,25 @@
-source
+source details for <%= @data_migration.name %>
+
+<%= form_for @data_migration, :url => wizard_path, :method => :put do |f| %>
+  <% if @data_migration.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@data_migration.errors.count, "error") %> prohibited this data_migration from being saved:</h2>
+
+      <ul>
+      <% @data_migration.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.fields_for :mapping_rules do |builder| %>
+    <%= render "mapping_rule_fields", :f => builder %>
+  <% end %>
+
+  <p><%= link_to_add_fields "Add Rule", f, :mapping_rules %></p>
+
+  <div class="actions">
+    <%= f.submit "Continue" %>
+  </div>
+<% end %>

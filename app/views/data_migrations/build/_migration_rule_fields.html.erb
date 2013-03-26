@@ -5,6 +5,3 @@
   <%= f.check_box :_destroy %>
   <%= f.label :_destroy, "Remove Rule" %>
 </p>
-<%= f.fields_for :mapping_rules do |builder| %>
-  <%= render 'mapping_rule_fields', :f => builder %>
-<% end %>
