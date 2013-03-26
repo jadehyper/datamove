@@ -13,6 +13,10 @@ source details for <%= @data_migration.name %>
     </div>
   <% end %>
 
+  <% @data_migration.migration_rules.each do |mr| %>
+    <u><%= mr.table_name %></u> <br>
+  <% end %>
+
   <%= f.fields_for :mapping_rules do |builder| %>
     <%= render "mapping_rule_fields", :f => builder %>
   <% end %>

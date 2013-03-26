@@ -1,9 +1,18 @@
+
+
 <p>
-  <%= f.label :src_table %><br />
+  <%= f.label "Source Table" %><br />
   <%= f.text_field :src_table %><br />
+
+  <%= f.label "Source Column" %><br />
+  <%= f.text_field :src_column %><br />
+
+  <%= f.label "Destination Table" %><br />
+  <%= f.text_field :dest_table %><br />
+
+  <%= f.label "Destination Column" %><br />
+  <%= f.text_field :dest_column %><br />
 
   <%= f.check_box :_destroy %>
   <%= f.label :_destroy, "Remove Mapping" %>
-
-
 </p>
