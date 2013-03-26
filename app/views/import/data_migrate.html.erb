@@ -1,5 +1,3 @@
-
-
 <%= form_tag import_analyze_path, :method => 'get' do %>
 Source table:
     <%= select_tag :src_db_table, options_for_select(SourceDb.get_tables, params[:src_db_table]), :onchange => '$.get("/import/src_tab_cols?src_db_table=" + this.value);', :prompt => 'Select a table' %>
@@ -8,9 +6,7 @@ Source table:
 
 
 Source column: <span id="src_col_span"></span>
-
 <br><br>
-
 <%= form_tag import_analyze_path, :method => 'get' do %>
 Destination table:
     <%= select_tag :dest_db_table, options_for_select(DestinationDb.get_tables, params[:dest_db_table]), :onchange => '$.get("/import/dest_tab_cols?dest_db_table=" + this.value);', :prompt => 'Select a table' %>

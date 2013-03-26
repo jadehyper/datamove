@@ -44,8 +44,7 @@ class DataMigrationsController < ApplicationController
 
     respond_to do |format|
       if @data_migration.save
-        format.html { redirect_to @data_migration, notice: 'Data migration was successfully created.' }
-        format.json { render json: @data_migration, status: :created, location: @data_migration }
+        # format.html { redirect_to data_migrations_wizard_path }
       else
         format.html { render action: "new" }
         format.json { render json: @data_migration.errors, status: :unprocessable_entity }
@@ -60,7 +59,7 @@ class DataMigrationsController < ApplicationController
 
     respond_to do |format|
       if @data_migration.update_attributes(params[:data_migration])
-        format.html { redirect_to @data_migration, notice: 'Data migration was successfully updated.' }
+        format.html { redirect_to @data_migration, notice: 'Data migration was successfully updated.', :action => :put }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

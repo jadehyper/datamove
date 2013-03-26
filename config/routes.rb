@@ -1,6 +1,12 @@
 Datamove::Application.routes.draw do
-  resources :data_migrations
+  resources :data_migrations do
+    resources :build, controller: 'data_migrations/build' do 
+      # post "create"
 
+    end
+  end
+
+  #resources :migration_steps
 
   get "home/index"
 
@@ -8,6 +14,10 @@ Datamove::Application.routes.draw do
   get "import/data_migrate"
   get "import/src_tab_cols"
   get "import/dest_tab_cols"
+
+
+
+  match 'data_migrations_wizard' => 'data_migrations/build#create', :via => [:post]
 
   resources :scrapes
 
