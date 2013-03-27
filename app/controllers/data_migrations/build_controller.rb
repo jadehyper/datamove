@@ -1,7 +1,7 @@
 class DataMigrations::BuildController < ApplicationController
   include Wicked::Wizard
 
-  steps :add_name, :dest_details, :src_details 
+  steps :add_name, :dest_details, :src_details, :preview, :results
 
   def show
     @data_migration = DataMigration.find(params[:data_migration_id])
@@ -12,8 +12,13 @@ class DataMigrations::BuildController < ApplicationController
 
   def update
     @data_migration = DataMigration.find(params[:data_migration_id])
-    @data_migration.update_attributes(params[:data_migration])
-    @data_migration.save
+    if step != :preview and step != :results
+      @data_migration.update_attributes(params[:data_migration])
+      @data_migration.save
+    elsif step == :preview
+      #perform actual migration
+      @results = @data_migration.execute_migration
+    end
 
     render_wizard @data_migration
   end

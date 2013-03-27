@@ -1,4 +1,6 @@
-source details for <%= @data_migration.name %>
+results
+
+yay done
 
 <%= form_for @data_migration, :url => wizard_path, :method => :put do |f| %>
   <% if @data_migration.errors.any? %>
@@ -13,16 +15,7 @@ source details for <%= @data_migration.name %>
     </div>
   <% end %>
 
-  <% @data_migration.migration_rules.each do |mr| %>
-    <h3><%= mr.table_name %></h3> 
-    <%= f.fields_for :mapping_rules do |builder| %>
-      <% logger.debug builder.inspect %>
-      <%= render "mapping_rule_fields", :f => builder %>
-    <% end %>
 
-    <p><%= link_to_add_fields "Add Rule", f, :mapping_rules, {:dest_table => mr.table_name} %></p>
-    <hr>
-  <% end %>
 
   <div class="actions">
     <%= f.submit "Continue" %>

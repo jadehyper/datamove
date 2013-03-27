@@ -15,4 +15,19 @@ class DestinationDb < ActiveRecord::Base
 
     return arr
   end
+
+  def self.get_sample_row(table_name)
+    arr = Hash.new("")
+
+    col_defs = DestinationDb.get_definition(table_name)
+
+    col_defs.each do |col_def|
+      arr[col_def[0]] = ""
+    end
+
+    #raise arr.inspect 
+    #example: {"id"=>"", "name"=>"", "title"=>"", "content"=>"", "created_at"=>"", "updated_at"=>""}
+    
+    return arr
+  end
 end
