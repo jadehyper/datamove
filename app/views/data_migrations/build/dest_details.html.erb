@@ -19,7 +19,10 @@ destination details for <%= @data_migration.name %>
 
   <p><%= link_to_add_fields "Add Rule", f, :migration_rules %></p>
 
+
   <div class="actions">
+
     <%= f.submit "Continue" %>
   </div>
 <% end %>
+<%= button_to "Back", previous_wizard_path, :method => :get %><br>

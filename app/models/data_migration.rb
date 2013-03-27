@@ -30,7 +30,8 @@ class DataMigration < ActiveRecord::Base
       end
     end
 
-    raise rows_to_be_inserted.inspect
+    # DestinationDb.insert_rows(rows_to_be_inserted)
+    # raise rows_to_be_inserted.inspect
   end
 
 

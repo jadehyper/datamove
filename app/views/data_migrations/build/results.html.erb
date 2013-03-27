@@ -18,6 +18,8 @@ yay done
 
 
   <div class="actions">
-    <%= f.submit "Continue" %>
+    <%= f.submit "Finish" %>
   </div>
 <% end %>
+
+<%= button_to "Back", previous_wizard_path, :method => :get %><br>
