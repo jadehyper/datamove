@@ -13,25 +13,41 @@ class DataMigration < ActiveRecord::Base
   def execute_migration
     rows_to_be_inserted = []
 
-    self.get_dest_tables.each do |dest|      
-      sample_row = DestinationDb.get_sample_row(dest)
+    self.get_dest_tables.each do |dest_tbl|      
+      sample_row = DestinationDb.get_sample_row(dest_tbl)
+
 
 
       #pull data from appropriate mapping rules
-      self.mapping_rules.where(:dest_table => dest).each do |rule|
-        new_row = sample_row.clone
-        data = SourceDb.get_data(rule.src_table)
+      first_rule = self.mapping_rules.where(:dest_table => dest_tbl).first #this mapping rule is the "first" rule, needs to be merged with other rules below
 
-        data.each do |row|
-          new_row[rule.dest_column] = row[rule.src_column] 
+      data = SourceDb.get_data(first_rule.src_table)
+
+      # raise data.inspect
+      data.each do |row|
+        mapping_rules_used = Array.new
+        mapping_rules_used << first_rule.id 
+
+        new_row = sample_row.clone
+
+        new_row[first_rule.dest_column] = row[first_rule.src_column] 
+
+        #merge with other rules
+        self.mapping_rules.where(:dest_table => dest_tbl, :src_table => first_rule.src_table).each do |other_rule|
+          if !mapping_rules_used.include?(other_rule.id)
+            mapping_rules_used << other_rule.id 
+
+            new_row[other_rule.dest_column] = row[other_rule.src_column] 
+          end
         end
 
         rows_to_be_inserted << new_row
       end
-    end
 
-    # DestinationDb.insert_rows(rows_to_be_inserted)
-    # raise rows_to_be_inserted.inspect
+      # raise rows_to_be_inserted.inspect
+
+      DestinationDb.insert_rows(dest_tbl, rows_to_be_inserted)
+    end
   end
 
 

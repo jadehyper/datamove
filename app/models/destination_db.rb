@@ -1,6 +1,6 @@
 class DestinationDb < ActiveRecord::Base
   establish_connection(:development_dest) #abstract db name based on env
-
+ 
   def self.get_tables
     return DestinationDb.connection.tables
   end
@@ -25,9 +25,53 @@ class DestinationDb < ActiveRecord::Base
       arr[col_def[0]] = ""
     end
 
-    #raise arr.inspect 
-    #example: {"id"=>"", "name"=>"", "title"=>"", "content"=>"", "created_at"=>"", "updated_at"=>""}
-    
     return arr
+  end
+
+
+  def self.get_column_names(table_name)
+    arr = []
+
+    col_defs = DestinationDb.get_definition(table_name)
+
+    col_defs.each do |col_def|
+      arr << col_def[0]
+    end
+
+    return arr
+  end
+
+
+  def self.insert_rows(table_name, rows)
+    #todo: abstract based on adapter
+
+    #mysql syntax: INSERT INTO tbl_name (col1,col2) VALUES(15,20);
+
+    # raise rows.inspect
+    column_names = DestinationDb.get_column_names(table_name)
+    cols_str = "(" + column_names.join(",") + ")"
+
+    rows.each do |row|
+      vals = []
+
+      column_names.each do |col|
+
+        if row[col]
+          vals << "'" + row[col] + "'" 
+        else
+          #todo: handle more gracefully, output to results page
+          raise "Column '#{col}' not found"
+        end
+      end
+
+      vals_str = "(" + vals.join(",") + ")"
+
+      # raise "insert into #{table_name} #{cols_str} VALUES#{vals_str};".inspect
+
+      DestinationDb.connection.execute("insert into #{table_name} #{cols_str} VALUES#{vals_str};")
+      # DestinationDb.connection.execute("insert into posts (name) VALUES('test_insert');")
+    end
+
+   
   end
 end
