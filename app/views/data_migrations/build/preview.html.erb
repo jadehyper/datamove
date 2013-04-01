@@ -13,11 +13,38 @@ Data Preview goes here
     </div>
   <% end %>
 
-  <% @data_migration.migration_rules.each do |mr| %>
-    <h3><%= mr.table_name %></h3> 
-    data data data
-    <hr>
+  
+  <% if @preview_errors %>
+    <div id="error_explanation">
+      Errors:
+      <ul>
+      <% @preview_errors.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
   <% end %>
+
+  <table>
+    <% @rows_preview.each_with_index do |record, i| %>  
+      <% if i == 0 %>
+        <!-- write out header row -->
+        <tr>
+          <% record.each do |key, value| %>
+            <th><%= key %></th> 
+          <% end %>
+        </tr>
+      <% end %>
+      
+      <tr>
+        <!-- write out data rows -->
+        <% record.each do |key, value| %>
+          <td><%= value %></td> 
+        <% end %>
+      </tr>    
+    <% end %>
+
+  </table>
 
   <div class="actions">
     <%= f.submit "Continue" %>
