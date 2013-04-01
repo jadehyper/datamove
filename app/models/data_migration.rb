@@ -19,14 +19,18 @@ class DataMigration < ActiveRecord::Base
     self.get_dest_tables.each do |dest_tbl|      
       sample_row = DestinationDb.get_sample_row(dest_tbl)
 
-
-
       #pull data from appropriate mapping rules
       first_rule = self.mapping_rules.where(:dest_table => dest_tbl).first #this mapping rule is the "first" rule, needs to be merged with other rules below
 
-      data = SourceDb.get_data(first_rule.src_table)
+      data = []
+      data_results = SourceDb.get_data(first_rule.src_table)
+      if data_results[:error]
+        preview_errors << data_results[:error]
+      else
+        data = data_results[:data]
+      end
 
-
+      preview_errors << "Warning: Source table '#{first_rule.src_table}' has no data" if !data or data.count < 1
 
       # raise data.inspect
       data.each do |row|
@@ -46,13 +50,13 @@ class DataMigration < ActiveRecord::Base
           if !mapping_rules_used.include?(other_rule.id)
             mapping_rules_used << other_rule.id 
 
-                
+
             if !row.has_key?(other_rule.src_column)
               preview_errors << "Source table '#{other_rule.src_table}', column '#{other_rule.src_column}' could not be found" 
             else
               new_row[other_rule.dest_column] = row[other_rule.src_column] 
             end
-            
+
 
           end
         end
@@ -67,9 +71,9 @@ class DataMigration < ActiveRecord::Base
       end
       # preview_errors.zip(DestinationDb.preview(dest_tbl, rows_to_be_inserted))
 
-      return rows_to_be_inserted, preview_errors.uniq!
     end
 
+    return rows_to_be_inserted, preview_errors.uniq!
   end
 
   def execute_migration

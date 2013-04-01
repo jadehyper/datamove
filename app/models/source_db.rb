@@ -6,7 +6,12 @@ class SourceDb < ActiveRecord::Base
   end
 
   def self.get_data(table_name)
-    return SourceDb.connection.select_all("select * from #{table_name};")
+    begin
+      return {:data => SourceDb.connection.select_all("select * from #{table_name};")}
+    rescue Exception=>e
+      return {:error => e}
+    end
+
   end
 
   def self.get_definition(table_name)
