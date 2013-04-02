@@ -1,6 +1,6 @@
 <p>
   Destination table:<br />
-  <%= f.select :table_name, options_for_select(DestinationDb.get_tables, params[:table_name]), :prompt => 'Select a table' %><br />
+  <%= f.select :table_name, options_for_select(DestinationDb.get_tables, f.object.table_name), :prompt => 'Select a table' %><br />
 
   <%= f.check_box :_destroy %>
   <%= f.label :_destroy, "Remove Rule" %>
